@@ -186,6 +186,10 @@ public:
 
     float GetImageScale();
 
+    //
+    void SavePointCloud(const std::string &filename);
+
+
 #ifdef REGISTER_TIMES
     void InsertRectTime(double& time);
     void InsertResizeTime(double& time);
