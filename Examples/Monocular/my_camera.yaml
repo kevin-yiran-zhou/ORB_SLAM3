@@ -10,7 +10,7 @@
 #System.LoadAtlasFromFile: "Session_MH01_MH02_MH03_Mono"
 
 # The store file is created from the current session, if a file with the same name exists it is deleted
-#System.SaveAtlasToFile: "Session_MH01_MH02_MH03_Mono"
+System.SaveAtlasToFile: "my_map"
 
 #--------------------------------------------------------------------------------------------
 # Camera Parameters. Adjust them!
@@ -75,5 +75,3 @@ Viewer.ViewpointX: 0.0
 Viewer.ViewpointY: -0.7
 Viewer.ViewpointZ: -1.8
 Viewer.ViewpointF: 500.0
-
-System.SaveAtlasToFile: "my_map.bin"

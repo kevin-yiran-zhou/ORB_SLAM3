@@ -1,0 +1,15 @@
+Run:
+cd Dev/ORB-SLAM
+./Examples/Monocular/mono_euroc ./Vocabulary/ORBvoc.txt ./Examples/Monocular/my_camera.yaml /home/kevinbee/Dev/video_frames /home/kevinbee/Dev/video_frames/mav0/cam0/timestamps.txt my_dataset
+
+Camera parameters:
+./Examples/Monocular/my_camera.yaml
+
+Video frames: 
+/Dev/video_frames
+
+timestamps.txt: 
+Dev/video_frames/mav0/cam0/timestamps.txt
+
+ouput: 
+./f_my_dataset.txt ./kf_my_dataset.txt
