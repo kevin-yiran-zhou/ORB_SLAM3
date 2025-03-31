@@ -553,6 +553,18 @@ void System::Shutdown()
 
     /*if(mpViewer)
         pangolin::BindToContext("ORB-SLAM2: Map Viewer");*/
+    
+    // Save point clouds
+    // std::ofstream outfile("map_points.ply");
+    // outfile << "ply\nformat ascii 1.0\nelement vertex " << Map->GetAllMapPoints().size() << "\n";
+    // outfile << "property float x\nproperty float y\nproperty float z\nend_header\n";
+
+    // for (MapPoint* pMP : Map->GetAllMapPoints()) {
+    //     if (!pMP || pMP->isBad()) continue;
+    //     cv::Mat pos = pMP->GetWorldPos();
+    //     outfile << pos.at<float>(0) << " " << pos.at<float>(1) << " " << pos.at<float>(2) << "\n";
+    // }
+    // outfile.close();
 
 #ifdef REGISTER_TIMES
     mpTracker->PrintTimeStats();
