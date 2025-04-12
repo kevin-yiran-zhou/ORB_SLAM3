@@ -21,33 +21,36 @@ def load_point_cloud(file_path):
     data = []
     with open(file_path, 'r') as f:
         for line in f:
-            if line.strip() == "":
+            if line.strip() == "" or line.startswith("pos_x"):
                 continue
-            parts = line.strip().split()
+            parts = line.strip().replace(',', ' ').split()
             x, y, z = map(float, parts)
             data.append([x, y, z])
     return np.array(data)
 
 def main():
-    parser = argparse.ArgumentParser(description="Visualize ORB-SLAM trajectory results.")
+    parser = argparse.ArgumentParser(description="Visualize ORB-SLAM trajectory and point cloud.")
     parser.add_argument("--floor", type=str, required=True, help="Floor name (e.g., FRB2)")
-
+    parser.add_argument("--ref", action='store_true', help="Use reference map points instead of raw map points")
     args = parser.parse_args()
-    floor = args.floor
 
+    floor = args.floor
     base_path = os.path.expanduser(f"~/Dev/ORB_SLAM_data/results/{floor}")
+    
     kf_file = os.path.join(base_path, f"kf_{floor}.txt")
     f_file = os.path.join(base_path, f"f_{floor}.txt")
 
+    # Choose between ref_map_points.txt and map_points.txt
+    pc_file = os.path.join(base_path, "ref_map_points.txt" if args.ref else "map_points.txt")
+
     if not os.path.exists(kf_file) or not os.path.exists(f_file):
-        print(f"[Error] Missing files for floor '{floor}'. Expected at:")
+        print(f"[Error] Missing trajectory files for floor '{floor}'. Expected at:")
         print(f"  {kf_file}")
         print(f"  {f_file}")
         return
 
     kf_traj = load_trajectory(kf_file)
     f_traj = load_trajectory(f_file)
-    pc_file = os.path.join(base_path, f"map_points_{floor}.txt")
     point_cloud = load_point_cloud(pc_file)
 
     fig = plt.figure()
@@ -60,13 +63,14 @@ def main():
         ax.scatter(point_cloud[:, 0], point_cloud[:, 1], point_cloud[:, 2],
                    s=1, c='blue', label="Map Points", alpha=0.6)
 
-    ax.set_title(f"ORB-SLAM Trajectories + Map Points - {floor}")
+    ax.set_title(f"ORB-SLAM Trajectory + Map Points ({'Ref' if args.ref else 'Raw'}) - {floor}")
     ax.set_xlabel("X")
     ax.set_ylabel("Y")
     ax.set_zlabel("Z")
     ax.legend()
     ax.grid()
-
+    plt.tight_layout()
+    plt.show()
 
 if __name__ == "__main__":
     main()

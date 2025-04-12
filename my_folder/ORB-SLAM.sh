@@ -61,4 +61,6 @@ echo "Done with SLAM for $VIDEO_FILE"
 # mv "$ORB_SLAM_DIR/f_${BASENAME}.txt" "$RESULTS_DIR/" 2>/dev/null
 # mv "$ORB_SLAM_DIR/kf_${BASENAME}.txt" "$RESULTS_DIR/" 2>/dev/null
 # mv "$ORB_SLAM_DIR/my_map.osa" "$RESULTS_DIR/" 2>/dev/null
+# mv "$ORB_SLAM_DIR/map_points.txt" "$RESULTS_DIR/" 2>/dev/null
+# mv "$ORB_SLAM_DIR/pointcloud.ply" "$RESULTS_DIR/" 2>/dev/null
 # echo "Results moved successfully to $RESULTS_DIR."
